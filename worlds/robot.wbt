@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.15320939514933118 0.939765780374178 0.30556040200865076 2.2408747792010937
-  position 0.8131162054753226 0.8989322093518792 -0.5200542264593947
+  orientation -0.4073801499632545 0.8628211765222509 0.29930090337430504 1.3901365828573577
+  position 0.7787707215116189 0.6883557537593356 0.19530475367482833
 }
 TexturedBackground {
 }
@@ -12,8 +12,8 @@ TexturedBackgroundLight {
 RectangleArena {
 }
 Robot {
-  translation 0 -0.000229773 0
-  rotation 0.011706719999931538 0.999830478516772 0.014211507160255382 -1.7672992617816705
+  translation 0.18097585306572883 -0.00022933760192933583 -0.06449767162585578
+  rotation -0.011465818567717 0.9998333986016231 -0.0142024661696393 -1.7844706748672625
   children [
     Transform {
       translation 0 0.0415 0
@@ -33,7 +33,7 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        position 434.013775406421
+        position 441.2483053744656
         axis -1 0 0
         anchor 0 0.025 0
       }
@@ -46,8 +46,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.04499999952643384 0.025003494964708335 -1.7953080857033946e-06
-        rotation 0.9999999999999937 -4.55817258601361e-08 1.0430142552310352e-07 4.5106806396105545
+        translation -0.04500046262747595 0.025004496489366118 -4.2502863588089745e-06
+        rotation 0.9999999999928134 1.5480734522948599e-06 3.4607451785945057e-06 -2.6997317108547505
         children [
           DEF WHEEL Transform {
             rotation 0 0 1 1.57
@@ -76,7 +76,7 @@ Robot {
     }
     HingeJoint {
       jointParameters HingeJointParameters {
-        position 186.60172670077583
+        position 193.83625701080442
         axis -1 0 0
         anchor 0 0.025 0
       }
@@ -89,8 +89,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.0449999995307988 0.024998755128069497 3.7256587783392836e-06
-        rotation 0.9999999999999961 -8.472150648880484e-08 -1.9282085391679312e-08 1.0956912786969089
+        translation 0.045000530353957846 0.025006170262098254 3.3912351314335787e-06
+        rotation 0.9999999990989931 -4.027233404452397e-05 1.3422113068739382e-05 0.16846389308431586
         children [
           USE WHEEL
         ]
@@ -100,8 +100,7 @@ Robot {
       }
     }
     DistanceSensor {
-      translation 0.02 0.06 -0.04
-      rotation 0 1 0 1.3090003061004252
+      translation 0.05 0.06 0
       children [
         DEF SENSOR Shape {
           appearance PBRAppearance {
@@ -118,12 +117,23 @@ Robot {
       }
     }
     DistanceSensor {
-      translation -0.02 0.06 -0.04
-      rotation 0 1 0 2.094399693899575
+      translation -0.05 0.06 0
+      rotation 0 1 0 3.141592653589793
       children [
         USE SENSOR
       ]
       name "ds_right"
+      boundingObject USE SENSOR
+      physics Physics {
+      }
+    }
+    DistanceSensor {
+      translation 0 0.05 -0.05
+      rotation 0 1 0 1.5707996938995747
+      children [
+        USE SENSOR
+      ]
+      name "ds_front"
       boundingObject USE SENSOR
       physics Physics {
       }
@@ -139,23 +149,7 @@ Robot {
     density -1
     mass 0.5
   }
-  controller "first_controller"
-}
-Solid {
-  translation -0.17035085053675636 0.049607599875024715 -0.09234574022721219
-  rotation 3.3918057482198837e-07 0.9999999999999408 -5.4188477203245455e-08 -0.0031219478799277
-  children [
-    Shape {
-      appearance PBRAppearance {
-      }
-      geometry Box {
-        size 0.1 0.1 0.1
-      }
-    }
-  ]
-  boundingObject Box {
-    size 0.1 0.1 0.1
-  }
-  physics Physics {
-  }
+  controller "Movement"
+  linearVelocity 0.15342865227930866 -6.019982448896369e-07 0.033287947266661067
+  angularVelocity 0.000553021731798631 -1.652198545216323e-06 7.288905287492074e-05
 }
