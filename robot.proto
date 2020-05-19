@@ -1,0 +1,146 @@
+#VRML_SIM R2020a utf8
+# Team 22 robot.
+
+PROTO robot [
+  field SFVec3f    translation  0 0 0
+  field SFRotation rotation     0 1 0 0
+  field SFFloat    bodyMass     1
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    children [
+        Transform {
+            translation 0 0.0415 0
+            children [
+                Shape {
+                appearance PBRAppearance {
+                    baseColor 0.333333 0.666667 0.498039
+                    roughness 1
+                    metalness 0
+                }
+                geometry DEF BODY Cylinder {
+                    height 0.08
+                    radius 0.045
+                }
+                }
+            ]
+        }
+        HingeJoint {
+            jointParameters HingeJointParameters {
+                position 434.013775406421
+                axis -1 0 0
+                anchor 0 0.025 0
+            }
+            device [
+                RotationalMotor {
+                name "left wheel motor"
+                }
+                PositionSensor {
+                name "left wheel sensor"
+                }
+            ]
+            endPoint Solid {
+                translation -0.04499999952643384 0.025003494964708335 -1.7953080857038172e-06
+                rotation 0.9999999999999936 -4.5581725860136116e-08 1.0430142552310356e-07 4.5106806396105545
+                children [
+                DEF WHEEL Transform {
+                    rotation 0 0 1 1.57
+                    children [
+                    Shape {
+                        appearance PBRAppearance {
+                        baseColor 1 0.666667 0.498039
+                        roughness 1
+                        metalness 0
+                        }
+                        geometry Cylinder {
+                        height 0.01
+                        radius 0.025
+                        }
+                    }
+                    ]
+                }
+                ]
+                name "right_wheel"
+                boundingObject USE WHEEL
+                physics DEF PHYSICS_WHEEL Physics {
+                density -1
+                mass 0.05
+                }
+                linearVelocity 0.022260353510819238 3.2172068507916306e-07 0.004221100128251221
+                angularVelocity 0.18698828600218018 -0.5030244753784768 -0.9824586628660046
+            }
+        }
+        HingeJoint {
+            jointParameters HingeJointParameters {
+                position 186.60172670077583
+                axis -1 0 0
+                anchor 0 0.025 0
+            }
+            device [
+                RotationalMotor {
+                name "right wheel motor"
+                }
+                PositionSensor {
+                name "right wheel sensor"
+                }
+            ]
+            endPoint Solid {
+                translation 0.04499999953079888 0.024998755128069497 3.725658778338773e-06
+                rotation 0.9999999999999961 -8.472150648880501e-08 -1.9282085391679338e-08 1.0956912786969075
+                children [
+                USE WHEEL
+                ]
+                name "left_wheel"
+                boundingObject USE WHEEL
+                physics USE PHYSICS_WHEEL
+                linearVelocity -0.02212562200628783 -2.9925349799950916e-07 -0.0042261230493580906
+                angularVelocity -0.18699322189072792 -0.5029206417705249 0.9823266014688041
+            }
+        }
+        DistanceSensor {
+            translation 0.02 0.06 -0.04
+            rotation 0 1 0 1.3090003061004252
+            children [
+                DEF SENSOR Shape {
+                    appearance PBRAppearance {
+                        metalness 0
+                    }
+                    geometry Box {
+                        size 0.01 0.01 0.01
+                    }
+                }
+            ]
+            name "ds_left"
+            boundingObject USE SENSOR
+            physics Physics {
+            }
+        }
+        DistanceSensor {
+            translation -0.02 0.06 -0.04
+            rotation 0 1 0 2.094399693899575
+            children [
+                USE SENSOR
+            ]
+            name "ds_right"
+            boundingObject USE SENSOR
+            physics Physics {
+            }
+        }
+    ]
+    boundingObject Transform {
+        translation 0 0.0415 0
+        children [
+        USE BODY
+        ]
+    }
+    physics Physics {
+        density -1
+        mass IS bodyMass
+    }
+    controller "Movement"
+    linearVelocity 7.324474668303969e-06 2.7767262286808987e-06 0.00030879381167180385
+    angularVelocity -2.3614632450470126e-06 -0.5017235128368821 -6.606947802082908e-05
+    }
+}
